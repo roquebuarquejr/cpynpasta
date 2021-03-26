@@ -29,8 +29,6 @@ class RecipeListPresenterImpl(private val service: RecipeService) :
                 view?.displayRecipes(response.recipes)
 
             } catch (exception: Exception) {
-                exception.printStackTrace()
-
                 view?.displayLoading(false)
                 view?.showError(R.string.error_message)
             }
