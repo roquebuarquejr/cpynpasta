@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">cpynpasta</string>
+    <string name="error_message">Algo deu errado :(</string>
+    <string name="error_http_401">Não autorizado :(</string>
 </resources>

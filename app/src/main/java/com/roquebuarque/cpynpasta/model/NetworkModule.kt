@@ -1,6 +1,7 @@
-package com.roquebuarque.cpynpasta
+package com.roquebuarque.cpynpasta.model
 
 import com.google.gson.Gson
+import com.roquebuarque.cpynpasta.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

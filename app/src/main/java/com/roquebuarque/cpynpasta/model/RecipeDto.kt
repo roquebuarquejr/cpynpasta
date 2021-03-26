@@ -1,4 +1,4 @@
-package com.roquebuarque.cpynpasta
+package com.roquebuarque.cpynpasta.model
 
 data class RecipeDto(
         val title: String,
