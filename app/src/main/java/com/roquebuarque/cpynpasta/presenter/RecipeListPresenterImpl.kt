@@ -34,7 +34,6 @@ class RecipeListPresenterImpl(private val service: RecipeService) :
                 view?.displayLoading(false)
                 view?.showError(R.string.error_message)
             }
-
         }
     }
 
@@ -47,11 +46,9 @@ class RecipeListPresenterImpl(private val service: RecipeService) :
     }
 
     companion object {
-
         fun create(service: RecipeService = NetworkModule.createNetworkService())
                 : RecipeListPresenterImpl {
             return RecipeListPresenterImpl(service)
         }
     }
-
 }
