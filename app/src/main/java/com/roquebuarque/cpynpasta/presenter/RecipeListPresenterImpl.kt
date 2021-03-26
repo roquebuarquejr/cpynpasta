@@ -11,28 +11,27 @@ import retrofit2.HttpException
 import java.lang.Exception
 import java.lang.IllegalArgumentException
 
-class RecipeListPresenterImpl(private val service: RecipeService) :
-    RecipeListContract.Presenter, LifecycleScope() {
+class RecipeListPresenterImpl private constructor(private val service: RecipeService)
+    : RecipeListContract.Presenter, LifecycleScope() {
 
     private var view: RecipeListContract.View? = null
 
     override fun fetchRandomRecipes() {
 
         launch {
-
             view?.displayLoading(true)
-
             try {
                 val response = service.getRecipes()
 
                 view?.displayLoading(false)
                 view?.displayRecipes(response.recipes)
 
-            } catch (exception: Exception) {
+            }catch (exception: Exception){
                 view?.displayLoading(false)
                 view?.showError(R.string.error_message)
             }
         }
+
     }
 
     override fun attachView(view: RecipeListContract.View) {
@@ -40,13 +39,13 @@ class RecipeListPresenterImpl(private val service: RecipeService) :
     }
 
     override fun detachView() {
-        this.view = null
+       this.view = null
     }
 
-    companion object {
-        fun create(service: RecipeService = NetworkModule.createNetworkService())
-                : RecipeListPresenterImpl {
+    companion object{
+        fun create(service: RecipeService = NetworkModule.createNetworkService()): RecipeListPresenterImpl {
             return RecipeListPresenterImpl(service)
         }
     }
+
 }

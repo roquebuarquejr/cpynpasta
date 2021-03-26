@@ -17,9 +17,10 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity(), RecipeListContract.View {
 
-    private val presenter = RecipeListPresenterImpl.create()
     lateinit var txtHello: TextView
     lateinit var progressBar: ProgressBar
+
+    private val presenter = RecipeListPresenterImpl.create()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +31,10 @@ class MainActivity : AppCompatActivity(), RecipeListContract.View {
 
         lifecycle.addObserver(presenter)
         presenter.fetchRandomRecipes()
+        //MVP
+        //Model -> Modelo data
+        //View -> UI
+        //Presenter -> Conexao entre Model/Data com a View
     }
 
     override fun onStart() {
@@ -37,20 +42,21 @@ class MainActivity : AppCompatActivity(), RecipeListContract.View {
         presenter.attachView(this)
     }
 
-    override fun onPause() {
+    override fun onStop() {
         presenter.detachView()
-        super.onPause()
+        super.onStop()
     }
 
     override fun displayRecipes(list: List<RecipeDto>) {
-        txtHello.text = list.size.toString()
+       txtHello.text = list.size.toString()
     }
 
     override fun displayLoading(isLoading: Boolean) {
-            progressBar.isVisible = isLoading
+        progressBar.isVisible = isLoading
     }
 
     override fun showError(message: Int) {
-        txtHello.setText(message)
+       txtHello.setText(message)
     }
+
 }
