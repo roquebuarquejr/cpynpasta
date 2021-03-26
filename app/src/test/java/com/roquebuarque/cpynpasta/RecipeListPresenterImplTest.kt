@@ -25,9 +25,11 @@ class RecipeListPresenterImplTest {
     @get:Rule
     var mainCoroutineRule = CoroutineTestRule()
 
+    //set mocks
     private val service: RecipeService = mock()
     private val view: RecipeListContract.View = mock()
 
+    //inicializa a classe que quero testar
     private val testee = RecipeListPresenterImpl.create(service)
 
     @Before
@@ -46,6 +48,7 @@ class RecipeListPresenterImplTest {
             //Given
             val list = getRecipeList()
             whenever(service.getRecipes()).thenReturn(RecipesResponse(list))
+
             //When
             testee.fetchRandomRecipes()
 
@@ -63,6 +66,7 @@ class RecipeListPresenterImplTest {
             //Given
             val error = RuntimeException()
             whenever(service.getRecipes()).thenThrow(error)
+
             //When
             testee.fetchRandomRecipes()
 
