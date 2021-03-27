@@ -1,12 +1,10 @@
 package com.roquebuarque.cpynpasta
 
-import com.roquebuarque.cpynpasta.model.RecipeService
-import org.junit.runner.RunWith
-import org.mockito.junit.MockitoJUnitRunner
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import com.roquebuarque.cpynpasta.model.RecipeDto
+import com.roquebuarque.cpynpasta.model.RecipeService
 import com.roquebuarque.cpynpasta.model.RecipesResponse
 import com.roquebuarque.cpynpasta.presenter.RecipeListContract
 import com.roquebuarque.cpynpasta.presenter.RecipeListPresenterImpl
@@ -16,6 +14,8 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.mockito.junit.MockitoJUnitRunner
 
 
 @ExperimentalCoroutinesApi
@@ -30,7 +30,7 @@ class RecipeListPresenterImplTest {
     private val view: RecipeListContract.View = mock()
 
     //inicializa a classe que quero testar
-    private val testee = RecipeListPresenterImpl.create(service)
+    private val testee = RecipeListPresenterImpl(service)
 
     @Before
     fun setup(){
