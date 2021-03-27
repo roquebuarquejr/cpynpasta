@@ -7,6 +7,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.RecyclerView
 import com.roquebuarque.cpynpasta.R
 import com.roquebuarque.cpynpasta.model.RecipeService
 import com.roquebuarque.cpynpasta.model.NetworkModule
@@ -17,8 +18,9 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity(), RecipeListContract.View {
 
-    lateinit var txtHello: TextView
-    lateinit var progressBar: ProgressBar
+    private lateinit var progressBar: ProgressBar
+    private lateinit var rvRecipeList: RecyclerView
+    private val adapter by lazy { RecipeListAdapter() }
 
     private val presenter = RecipeListPresenterImpl.create()
 
@@ -26,15 +28,14 @@ class MainActivity : AppCompatActivity(), RecipeListContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        txtHello = findViewById(R.id.helloWorld)
+        rvRecipeList = findViewById(R.id.rvRecipeList)
         progressBar = findViewById(R.id.progressBar)
+        rvRecipeList.adapter = adapter
 
         lifecycle.addObserver(presenter)
         presenter.fetchRandomRecipes()
-        //MVP
-        //Model -> Modelo data
-        //View -> UI
-        //Presenter -> Conexao entre Model/Data com a View
+
+
     }
 
     override fun onStart() {
@@ -48,7 +49,7 @@ class MainActivity : AppCompatActivity(), RecipeListContract.View {
     }
 
     override fun displayRecipes(list: List<RecipeDto>) {
-       txtHello.text = list.size.toString()
+        adapter.submitList(list)
     }
 
     override fun displayLoading(isLoading: Boolean) {
@@ -56,7 +57,7 @@ class MainActivity : AppCompatActivity(), RecipeListContract.View {
     }
 
     override fun showError(message: Int) {
-       txtHello.setText(message)
+       // txtHello.setText(message)
     }
 
 }

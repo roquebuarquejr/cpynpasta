@@ -2,4 +2,6 @@
     <string name="app_name">cpynpasta</string>
     <string name="error_message">Algo deu errado :(</string>
     <string name="error_http_401">Não autorizado :(</string>
+    <string name="image_recipe_content">Image recipe</string>
+    <string name="image_recipe_min">%1$d min</string>
 </resources>
